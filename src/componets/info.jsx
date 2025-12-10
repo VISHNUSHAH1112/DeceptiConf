@@ -4,7 +4,6 @@ import Bg2 from "/2.jpg";
 export default function ConferenceSchedule() {
     const [activeDay, setActiveDay] = useState(0);
 
-
     const days = [
         {
             date: "April 4",
@@ -58,6 +57,7 @@ export default function ConferenceSchedule() {
             }}
         >
             <div className="max-w-6xl mx-auto">
+
                 {/* Heading */}
                 <h1 className="text-4xl font-bold text-blue-600">
                     Our three day schedule is jam-packed <br /> with brilliant, creative, evil geniuses.
@@ -66,28 +66,30 @@ export default function ConferenceSchedule() {
                 <p className="text-blue-900 mt-4 text-2xl leading-relaxed">
                     The worst people in our industry giving the best talks you’ve ever seen.
                     <br />
-                    Nothing will be recorded and every attendee has to sign an NDA to watch <br /> the talks.
-                </p><div className="hidden md:grid grid-cols-3 gap-6 mt-12">
+                    Nothing will be recorded and every attendee has to sign an NDA to watch the talks.
+                </p>
+
+                {/* Desktop Day Descriptions */}
+                <div className="hidden md:grid grid-cols-3 gap-6 mt-12">
                     {days.map((day, i) => (
-                        <div key={i} className="">
+                        <div key={i}>
                             <h1 className="text-2xl font-semibold text-blue-900">{day.date}</h1>
                             <p className="text-sm mt-2">{day.desc}</p>
                         </div>
-                    ))}</div>
+                    ))}
+                </div>
 
-                {/* DESKTOP & TABLET VIEW – all day boxes with sessions */}
+                {/* Desktop Day Columns with Sessions */}
                 <div className="hidden md:grid grid-cols-3 gap-8 mt-12">
                     {days.map((day, i) => (
-                        <div key={i} className="bg-white/90 shadow-lg p-5">
-
-
-                            <div className="mt-4 space-y-9 ">
+                        <div key={i} className="bg-white/90 shadow-lg p-5 rounded-lg">
+                            <div className="mt-4 space-y-9">
                                 {day.sessions.map((s, idx) => (
                                     <div key={idx} className="text-center">
                                         <h3 className="text-lg font-semibold text-blue-900">{s.name}</h3>
                                         {s.role && <p className="text-blue-900 text-sm">{s.role}</p>}
                                         <p className="text-slate-500 text-xs mt-1 font-mono">{s.time}</p>
-                                        <div className="h-[1px] bg-slate-300 mt-2 w-50 ml-16"></div>
+                                        <div className="h-px bg-slate-300 mt-2"></div>
                                     </div>
                                 ))}
                             </div>
@@ -95,13 +97,15 @@ export default function ConferenceSchedule() {
                     ))}
                 </div>
 
+                {/* Mobile Day Selector */}
                 <div className="md:hidden mt-10 overflow-x-auto flex gap-4 pb-1">
                     {days.map((day, i) => (
                         <div
                             key={i}
                             onClick={() => setActiveDay(i)}
-                            className={` w-[160px] p-5 rounded-xl flex-shrink-0 cursor-pointer transition
-          ${activeDay === i ? "  text-blue-900 shadow-xl" : "bg-transparent text-blue-700"}`}
+                            className={`w-[160px] p-5 rounded-xl flex-shrink-0 cursor-pointer transition 
+                ${activeDay === i ? "bg-white shadow-xl text-blue-900" : "bg-transparent text-blue-700"}
+              `}
                         >
                             <h1 className="text-xl font-semibold">{day.date}</h1>
                             <p className="text-sm mt-2">{day.desc}</p>
@@ -109,7 +113,7 @@ export default function ConferenceSchedule() {
                     ))}
                 </div>
 
-                {/* MOBILE SESSION LIST – visible only on mobile */}
+                {/* Mobile Session List */}
                 <div className="md:hidden mt-12">
                     <div className="bg-white shadow-xl rounded-xl p-8">
                         <h2 className="text-2xl font-semibold text-blue-900">{days[activeDay].date}</h2>
@@ -121,7 +125,7 @@ export default function ConferenceSchedule() {
                                     <h3 className="text-xl font-semibold text-blue-900">{s.name}</h3>
                                     {s.role && <p className="text-blue-900 text-sm">{s.role}</p>}
                                     <p className="text-slate-500 text-sm mt-1 font-mono">{s.time}</p>
-                                    <div className="h-[1px] bg-slate-300 mt-4"></div>
+                                    <div className="h-px bg-slate-300 mt-4"></div>
                                 </div>
                             ))}
                         </div>
